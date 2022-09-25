@@ -11,7 +11,7 @@ public class AccounterApplication {
 
 	@GetMapping("/")
 	public String hello() {
-		return "Hello Spring World";
+		return "Hello Spring World! Test CICD";
 	}
 
 	public static void main(String[] args) {
