@@ -61,6 +61,5 @@ jobs:
         envs: GITHUB_SHA
         script: |
           docker pull ksone02/accounter:latest
-          docker tag ksone02/accounter:latest accounter
-          docker stop accounter
-          docker run -d --rm --name accounter -p 8080:8080 accounter
+          docker stop ksone02/accounter:latest
+          docker run -d --rm --name ksone02/accounter:latest -p 8080:8080 ksone02/accounter:latest
