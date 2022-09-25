@@ -10,10 +10,7 @@ name: Java CI with Gradle
 on:
   push:
     branches: [ "main" ]
-
-permissions:
-  contents: read
-
+    
 jobs:
   CI-CD:
     runs-on: ubuntu-latest
@@ -26,6 +23,10 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
+        
+    # Gradle execute
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
         
     # gradle caching
     - name: Gradle Caching
@@ -40,9 +41,7 @@ jobs:
         
     # gradle build
     - name: Build with Gradle
-      uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
-      with:
-        arguments: build
+      run: ./gradlew build
         
     # Docker Set up
     - name: Docker build
