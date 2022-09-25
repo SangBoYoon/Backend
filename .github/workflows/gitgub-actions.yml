@@ -48,8 +48,7 @@ jobs:
     - name: Docker build
       run: |
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-        docker build --build-arg DEPENDENCY=build/dependency -t ksone02/accounter .
-        docker tag ksone02/accounter ksone02/accounter:latest
+        docker build -t ksone02/accounter:latest .
         docker push ksone02/accounter:latest
         
     # Deploy
