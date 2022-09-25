@@ -42,7 +42,6 @@ jobs:
     # gradle build
     - name: Build with Gradle
       run: | 
-        ./gradlew build
         ./gradlew clean build
         
     # Docker Set up
