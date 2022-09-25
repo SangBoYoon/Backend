@@ -1,0 +1,70 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
+name: Java CI with Gradle
+
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  CI-CD:
+    runs-on: ubuntu-latest
+
+    steps:
+    # jdk setting
+    - uses: actions/checkout@v3
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        
+    # gradle caching
+    - name: Gradle Caching
+      uses: actions/cache@v3
+      with:
+        path:
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{hashFiles('**/*.gradle*','**/gradle-wrapper.properties')}}
+        restore-keys:
+          ${{ runner.os }}-gradle-
+        
+    # gradle build
+    - name: Build with Gradle
+      uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+      with:
+        arguments: build
+        
+    # Docker Set up
+    - name: Docker build
+      run:
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        docker build -t accounter .
+        docker tag accounter ksone02/accounter:latest
+        docker push ksone02/accounter:latest
+        
+    # Deploy
+    - name: Deploy
+      uses: appleboy/ssh-action@master
+      with:
+        host: ec2-43-201-66-51.ap-northeast-2.compute.amazonaws.com
+        username: accounter
+        key: ${{ secrets.PRIVATE_KEY }}
+        envs: GITHUB_SHA
+        script:
+          docker pull ksone02/accounter:latest
+          docker tag ksone02/accounter:latest accounter
+          docker stop server
+          docker run -d --rm --name server -p 8080:8080 accounter
+        
+
+      
