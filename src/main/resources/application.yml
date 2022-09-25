@@ -7,7 +7,7 @@ spring:
       use-new-id-generator-mappings: false
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
   datasource:
-    url: jdbc:mysql://accounter-db.clcywhhrzlxo.ap-northeast-2.rds.amazonaws.com:3306
+    url: jdbc:mysql://accounter-rds.clcywhhrzlxo.ap-northeast-2.rds.amazonaws.com:3306
     username: admin
     password: rkdduddms11
     driver-class-name: com.mysql.cj.jdbc.Driver
