@@ -45,9 +45,9 @@ jobs:
         
     # Docker Set up
     - name: Docker build
-      run:
+      run: |
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-        docker build --build-arg DEPENDENCY=build/dependency -t ksone02/accounter .
+        docker build -t ksone02/accounter .
         docker tag ksone02/accounter ksone02/accounter:latest
         docker push ksone02/accounter:latest
         
@@ -59,7 +59,7 @@ jobs:
         username: accounter
         key: ${{ secrets.PRIVATE_KEY }}
         envs: GITHUB_SHA
-        script:
+        script: |
           docker pull ksone02/accounter:latest
           docker tag ksone02/accounter:latest accounter
           docker stop server
