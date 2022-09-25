@@ -63,4 +63,4 @@ jobs:
           docker stop accounter
           docker rm accounter
           docker pull ksone02/accounter:latest
-          docker run -p 8080:8080 --name accounter ksone02/accounter:latest
+          docker run --restart-unless-stopped -d -p 8080:8080 --name accounter ksone02/accounter:latest
