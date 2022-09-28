@@ -4,14 +4,12 @@ import com.sangboyoon.accounter.domain.security.exceptions.CAuthenticationEntryP
 import com.sangboyoon.accounter.web.users.sign.dto.TokenDto;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import io.jsonwebtoken.impl.Base64UrlCodec;
@@ -27,7 +25,7 @@ import java.util.Date;
 @Component
 public class JwtTokenProvider {
 
-    // @Value("${spring.jwt.secret}")
+    @Value("${spring.jwt.secret}")
     private String SECRET_KEY;
 
     private String ROLES = "roles";
