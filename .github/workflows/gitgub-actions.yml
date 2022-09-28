@@ -60,6 +60,7 @@ jobs:
         key: ${{ secrets.PRIVATE_KEY }}
         envs: GITHUB_SHA
         script: |
+          docker stop accounter
+          docker rm accounter
           docker pull ksone02/accounter:latest
-          docker stop ksone02/accounter:latest
-          docker run -d --rm --name ksone02/accounter:latest -p 8080:8080 ksone02/accounter:latest
+          docker run -d -p 8080:8080 --name accounter ksone02/accounter:latest
