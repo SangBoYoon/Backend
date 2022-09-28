@@ -6,8 +6,11 @@ spring:
       ddl-auto: create
       use-new-id-generator-mappings: false
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    properties:
+      hibernate:
+        format_sql: true
   datasource:
-    url: jdbc:mysql://accounter-rds.clcywhhrzlxo.ap-northeast-2.rds.amazonaws.com:3306
+    url: jdbc:mysql://accounter-rds.clcywhhrzlxo.ap-northeast-2.rds.amazonaws.com:3306/accounter?useSSL=false&characterEncoding=UTF-8&serverTimeZone=Asia/Seoul
     username: admin
     password: rkdduddms11
     driver-class-name: com.mysql.cj.jdbc.Driver
