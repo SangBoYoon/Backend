@@ -15,5 +15,5 @@ spring:
     password: rkdduddms11
     driver-class-name: com.mysql.cj.jdbc.Driver
   redis:
-    host: redis
+    host: 172.17.0.1
     port: 6379
