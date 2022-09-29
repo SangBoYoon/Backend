@@ -38,5 +38,5 @@ public class SignController {
 
     @PostMapping("/logout")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void logout(@RequestBody@Valid TokenRequest request) { signService.logout(request); }
+    public void logout(@RequestBody @Valid TokenRequest request) { signService.logout(request); }
 }
