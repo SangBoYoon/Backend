@@ -17,7 +17,7 @@ import javax.validation.Valid;
 public class SignController {
     private final SignService signService;
 
-    @PostMapping
+    @PostMapping("/login")
     @ResponseStatus(HttpStatus.CREATED)
     public ApiResponse<TokenDto> login(@RequestBody @Validated(ValidationSequence.class)LoginUserRequest request) {
         TokenDto tokenDto = signService.login(request);
