@@ -24,13 +24,13 @@ public class User extends BaseTimeEntity {
     private String email;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String password;
 
     @Column(nullable = false)
     private String nickName;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String role;
 
     public void update(String password, String nickName) {

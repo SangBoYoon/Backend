@@ -11,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 
 @Getter
 @Builder
@@ -36,6 +35,15 @@ public class SignupUserRequest {
                 .password(passwordEncoder.encode(password))
                 .nickName(nickName)
                 .role(role)
+                .build();
+    }
+
+    public static User toEntity(String email, String nickName) {
+        return User.builder()
+                .email(email)
+                .password("")
+                .nickName(nickName)
+                .role("USER")
                 .build();
     }
 }
