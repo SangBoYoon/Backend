@@ -30,7 +30,7 @@ public class User extends BaseTimeEntity {
     @Column(nullable = false)
     private String nickName;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String role;
 
     public void update(String password, String nickName) {

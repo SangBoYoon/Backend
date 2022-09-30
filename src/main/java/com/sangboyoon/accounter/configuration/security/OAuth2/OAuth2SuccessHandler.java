@@ -5,7 +5,6 @@ import com.sangboyoon.accounter.configuration.security.JwtTokenProvider;
 import com.sangboyoon.accounter.domain.security.exceptions.CEmailLoginFailedException;
 import com.sangboyoon.accounter.domain.user.User;
 import com.sangboyoon.accounter.domain.user.UserRepository;
-import com.sangboyoon.accounter.web.users.dto.UserDto;
 import com.sangboyoon.accounter.web.users.sign.dto.SignupUserRequest;
 import com.sangboyoon.accounter.web.users.sign.dto.TokenDto;
 import lombok.RequiredArgsConstructor;

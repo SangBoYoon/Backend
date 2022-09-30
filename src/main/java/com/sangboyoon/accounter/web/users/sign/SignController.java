@@ -3,7 +3,6 @@ package com.sangboyoon.accounter.web.users.sign;
 import com.sangboyoon.accounter.advice.ValidationSequence;
 import com.sangboyoon.accounter.application.security.SignService;
 import com.sangboyoon.accounter.web.common.ApiResponse;
-import com.sangboyoon.accounter.web.users.dto.UserDto;
 import com.sangboyoon.accounter.web.users.sign.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -40,13 +39,4 @@ public class SignController {
     @PostMapping("/logout")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void logout(@RequestBody @Valid TokenRequest request) { signService.logout(request); }
-
-    @GetMapping("/kakao")
-    @ResponseStatus(HttpStatus.CREATED)
-    public ApiResponse<TokenDto> kakaoCallback(@RequestParam @Valid String code) {
-        String access_token = signService.getKakaoAccessToken(code);
-        TokenDto tokenDto = signService.createKakaoUser(access_token);
-
-        return new ApiResponse<>(tokenDto);
-    }
 }
