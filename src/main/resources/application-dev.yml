@@ -1,4 +1,7 @@
 spring:
+  config:
+    activate:
+      on-profile: dev
   security:
     oauth2:
       client:
@@ -6,7 +9,7 @@ spring:
           kakao:
             client-id: ead8e7984fdc096a6e450e0a638a8c8d
             client-secret: 2lTkLrlaOjZWAGJ0PkhNVzWEBGk9HI3E
-            redirect-uri: http://54.180.19.84:8080/login/oauth2/code/kakao
+            redirect-uri: http://localhost:8080/login/oauth2/code/kakao
             authorization-grant-type: authorization_code
             client-authentication-method: POST
             client-name: Kakao
@@ -41,5 +44,5 @@ spring:
     password: rkdduddms11
     driver-class-name: com.mysql.cj.jdbc.Driver
   redis:
-    host: 172.17.0.1
+    host: localhost
     port: 6379
