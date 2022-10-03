@@ -8,6 +8,7 @@ import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class XMLParsing {
 
             DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
-            Document doc = dBuilder.parse("src/main/resources/CORPCODE.xml");
+            Document doc = dBuilder.parse("src" + File.separator + "main" + File.separator + "resources" + File.separator + "CORPCODE.xml");
 
             // 제일 첫번째 태그
             doc.getDocumentElement().normalize();

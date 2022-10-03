@@ -29,10 +29,11 @@ spring:
     secret: jwt
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     properties:
       hibernate:
+        show-sql: true
         format_sql: true
   datasource:
     url: jdbc:mysql://accounter-rds.clcywhhrzlxo.ap-northeast-2.rds.amazonaws.com:3306/accounter?useSSL=false&characterEncoding=UTF-8&serverTimeZone=Asia/Seoul

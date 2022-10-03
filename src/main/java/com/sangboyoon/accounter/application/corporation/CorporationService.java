@@ -82,7 +82,7 @@ public class CorporationService implements CorporationUseCase {
     @Override
     public List<List<String>> readCSV() {
         List<List<String>> csvList = new ArrayList<List<String>>();
-        File csv = new File("src/main/resources/corpCode.csv");
+        File csv = new File("src" + File.separator + "main" + File.separator + "resources" + File.separator + "corpCode.csv");
         BufferedReader br = null;
         String line = "";
 
