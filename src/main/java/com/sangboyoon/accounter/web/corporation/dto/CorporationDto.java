@@ -10,10 +10,14 @@ import lombok.Getter;
 @AllArgsConstructor
 public class CorporationDto {
     private final String corpCode;
+    private final String corpName;
+    private final String corpCategory;
     private final Long likeCount;
 
     public CorporationDto(Corporation corporation) {
         this.corpCode = corporation.getCorpCode();
+        this.corpName = corporation.getCorpName();
+        this.corpCategory = corporation.getCorpCategory();
         this.likeCount = corporation.getCorpLike();
     }
 
