@@ -30,7 +30,6 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
-      use-new-id-generator-mappings: false
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     properties:
       hibernate:

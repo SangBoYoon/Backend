@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 
@@ -13,11 +14,12 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 @Entity
 @Table(name = "User")
 public class User extends BaseTimeEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, unique = true)
@@ -27,7 +29,7 @@ public class User extends BaseTimeEntity {
     @Column(nullable = true)
     private String password;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "nickName")
     private String nickName;
 
     @Column(nullable = false)
