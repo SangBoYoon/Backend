@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/api")
+@RequestMapping("/accounter")
 public class CorporationController {
     private final CorporationUseCase corporationUseCase;
 
@@ -26,6 +26,12 @@ public class CorporationController {
         return new ApiResponse<>(corporations.stream()
                 .map(CorporationDto::new)
                 .collect(Collectors.toList()));
+    }
+
+    @GetMapping("/corp/{corpCode}")
+    public ApiResponse<CorporationDto> findCorporation(@PathVariable("corpCode") String corpCode) {
+        CorporationDto corporations = corporationUseCase.findCorporation(corpCode);
+        return new ApiResponse<>(corporations);
     }
 
     @PostMapping("/corp/like/{corpCode}")

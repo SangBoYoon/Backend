@@ -5,7 +5,9 @@ import com.sangboyoon.accounter.domain.corporation.Corporation;
 import com.sangboyoon.accounter.domain.corporation.CorporationRepository;
 import com.sangboyoon.accounter.domain.corporation.LikeEntity;
 import com.sangboyoon.accounter.domain.corporation.LikeRepository;
+import com.sangboyoon.accounter.domain.corporation.exception.CCorporationNotFoundException;
 import com.sangboyoon.accounter.domain.user.User;
+import com.sangboyoon.accounter.web.corporation.dto.CorporationDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -32,30 +34,25 @@ public class CorporationService implements CorporationUseCase {
     }
 
     @Override
-    public Optional<Corporation> findCorporation(String corpCode) {
-        Optional<Corporation> corporation = corporationRepository.findByCorpCode(corpCode);
-        return corporation;
+    public CorporationDto findCorporation(String corpCode) {
+        Corporation corporation = corporationRepository.findByCorpCode(corpCode).orElseThrow(RuntimeException::new);
+        return new CorporationDto(corporation);
     }
 
     @Transactional
     @Override
     public int saveLike(String corpCode, User user) {
-        log.info("corporation code?" + corpCode);
-        Optional<Corporation> corporation = corporationRepository.findByCorpCode(corpCode);
-        log.info("corporation is present?" + corporation.isPresent());
+        Corporation corporation = corporationRepository.findByCorpCode(corpCode).orElseThrow(CCorporationNotFoundException::new);
         Optional<LikeEntity> findLike = likeRepository.findByCorporationAndUserId(corpCode, user.getId());
-        log.info("likeEntity?" + findLike.isPresent());
 
         if(findLike.isEmpty()) {
-            log.info("findLike not found");
-            LikeEntity likeEntity = LikeEntity.toLikeEntity(user, corporation.get());
+            LikeEntity likeEntity = LikeEntity.toLikeEntity(user, corporation);
             likeRepository.save(likeEntity);
-            corporationRepository.plusLike(corporation.get().getCorpCode());
+            corporationRepository.plusLike(corporation.getCorpCode());
             return 1;
         } else {
-            log.info("findLike found and delete");
-            likeRepository.deleteByCorporationAndUserIdInQuery(corporation.get().getCorpCode(), user.getId());
-            corporationRepository.minusLike(corporation.get().getCorpCode());
+            likeRepository.deleteByCorporationAndUserIdInQuery(corporation.getCorpCode(), user.getId());
+            corporationRepository.minusLike(corporation.getCorpCode());
             return 0;
         }
     }

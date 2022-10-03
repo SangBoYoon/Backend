@@ -1,6 +1,6 @@
 package com.sangboyoon.accounter.domain.bookmark;
 
-import com.sangboyoon.accounter.domain.corporation.Corporation;
+import com.sangboyoon.accounter.web.bookmark.dto.AddBookmarkDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface BookmarkRepository extends JpaRepository<Bookmark, Long> {
-    List<Bookmark> findAllByUserId(Long userId);
+    List<AddBookmarkDto> findAllByUserId(Long userId);
 
     @Query(value = "SELECT * FROM bookmark " +
             "where user_id = :userId AND corp_code = :corporation", nativeQuery = true)

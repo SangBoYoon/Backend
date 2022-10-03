@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/accounter")
 @RequiredArgsConstructor
 public class UsersController {
     private final UserUseCase userUseCase;
