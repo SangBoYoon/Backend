@@ -53,9 +53,7 @@ public class SecurityConfiguration {
 
         http
                 .authorizeRequests() // URL 별 권한 설정
-                .antMatchers("/api/signup", "/api/login", "/api/reissue", "/api/kakao", "/api/**", "/", "/exception/**").permitAll()
-                .antMatchers("/api/user/**", "/api/users/**").permitAll()
-                .antMatchers("/api/user", "/api/logout").permitAll()
+                .antMatchers("/accounter/**", "/", "/exception/**").permitAll()
                 .antMatchers("/h2-console/**", "/favicon.ico").permitAll()
                 .antMatchers("/token/**").permitAll()
                 .antMatchers("/oauth2/authorization/**").permitAll()
