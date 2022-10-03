@@ -69,8 +69,12 @@ public class CorporationService implements CorporationUseCase {
         for(int i = 1; i < list.toArray().length; i++) {
             String corpCode = "";
             for(int j = 0; j < corp_code_list.toArray().length; j++) {
-                if(corp_code_list.get(j).get(1).equals(list.get(i).get(1).replaceAll("\"", "")))
+                if(corp_code_list.get(j).get(1).equals(list.get(i).get(1).replaceAll("\"", ""))) {
                     corpCode = corp_code_list.get(j).get(0);
+                }
+            }
+            if(corpCode == "") {
+                continue;
             }
 
             System.out.println(list.get(i).get(1) + list.get(i).get(3) + corpCode);
@@ -82,12 +86,12 @@ public class CorporationService implements CorporationUseCase {
     @Override
     public List<List<String>> readCSV() {
         List<List<String>> csvList = new ArrayList<List<String>>();
-        File csv = new File("src" + File.separator + "main" + File.separator + "resources" + File.separator + "corpCode.csv");
+
         BufferedReader br = null;
         String line = "";
 
         try {
-            br = new BufferedReader(new FileReader(csv));
+            br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/corpCode.csv")));
 
             while ((line = br.readLine()) != null) {
                 List<String> aLine = new ArrayList<String>();
