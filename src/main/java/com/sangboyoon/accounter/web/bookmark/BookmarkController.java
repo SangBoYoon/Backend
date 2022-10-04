@@ -37,7 +37,7 @@ public class BookmarkController {
                 .collect(Collectors.toList()));
     }
 
-    @DeleteMapping("/bookmark")
+    @PostMapping("/bookmark/delete")
     public ApiResponse<String> cancelBookmark(@CurrentUser User user, @RequestBody DeleteBookmarkRequest request) throws Exception {
         bookmarkUseCase.cancelBookmark(user, request.getCorpCode());
         return new ApiResponse<>("delete success");
