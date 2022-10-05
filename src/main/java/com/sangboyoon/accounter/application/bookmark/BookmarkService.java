@@ -33,11 +33,19 @@ public class BookmarkService implements BookmarkUseCase {
         User user = userRepository.findById(userId).orElseThrow(CUserNotFoundException::new);
         Corporation corporation = corporationRepository.findByCorpCode(addBookmarkRequest.getCorpCode()).orElseThrow(CCorporationNotFoundException::new);
 
-        Bookmark bookmark = Bookmark.builder()
-                .user(user)
-                .corporation(corporation)
-                .build();
-        return new AddBookmarkDto(bookmarkRepository.save(bookmark));
+        Optional<Bookmark> bookmarkEntity = bookmarkRepository.findByCorporationAndUserId(addBookmarkRequest.getCorpCode(), userId);
+
+        if(bookmarkEntity.isEmpty()) {
+            Bookmark bookmark = Bookmark.builder()
+                    .user(user)
+                    .corporation(corporation)
+                    .build();
+            return new AddBookmarkDto(bookmarkRepository.save(bookmark));
+        } else {
+            bookmarkRepository.deleteById(bookmarkEntity.get().getId());
+            return new AddBookmarkDto(bookmarkEntity.orElseThrow(BookmarkNotFoundException::new));
+        }
+
     }
 
     @Override
