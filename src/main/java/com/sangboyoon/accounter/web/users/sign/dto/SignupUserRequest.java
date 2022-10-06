@@ -38,12 +38,12 @@ public class SignupUserRequest {
                 .build();
     }
 
-    public static User toEntity(String email, String nickName) {
+    public static User toEntity(String email, String nickName, String role) {
         return User.builder()
                 .email(email)
                 .password("")
                 .nickName(nickName)
-                .role("USER")
+                .role(role)
                 .build();
     }
 }

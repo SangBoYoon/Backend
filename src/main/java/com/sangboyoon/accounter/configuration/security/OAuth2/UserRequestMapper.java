@@ -13,7 +13,7 @@ public class UserRequestMapper {
                 .nickName((String) attributes.get("nickName"))
                 .email((String) attributes.get("email"))
                 .password("")
-                .role("USER")
+                .role("SNS_USER")
                 .build();
     }
 }

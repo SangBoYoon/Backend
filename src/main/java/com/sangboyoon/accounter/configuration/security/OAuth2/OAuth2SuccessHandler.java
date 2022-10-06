@@ -40,7 +40,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         log.info("토큰 발행 시작");
 
         if(!userRepository.findByEmail(userDto.getEmail()).isPresent()) {
-            userRepository.save(SignupUserRequest.toEntity(userDto.getEmail(), userDto.getNickName()));
+            userRepository.save(SignupUserRequest.toEntity(userDto.getEmail(), userDto.getNickName(), userDto.getRole()));
         }
 
         User user = userRepository.findByEmail(userDto.getEmail()).orElseThrow(CEmailLoginFailedException::new);
