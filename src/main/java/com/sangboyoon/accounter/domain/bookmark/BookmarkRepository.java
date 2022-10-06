@@ -16,4 +16,6 @@ public interface BookmarkRepository extends JpaRepository<Bookmark, Long> {
     @Query(value = "SELECT * FROM bookmark " +
             "where user_id = :userId AND corp_code = :corporation", nativeQuery = true)
     Optional<Bookmark> findByCorporationAndUserId(@Param("corporation") String corporation, @Param("userId") Long userId);
+
+    void deleteAllByUserId(Long userId);
 }

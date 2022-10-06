@@ -6,6 +6,7 @@ import com.sangboyoon.accounter.domain.user.User;
 import com.sangboyoon.accounter.web.common.ApiResponse;
 import com.sangboyoon.accounter.web.users.dto.UpdateUserRequest;
 import com.sangboyoon.accounter.web.users.dto.UserDto;
+import com.sangboyoon.accounter.web.users.sign.dto.DeleteUserRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,13 @@ public class UsersController {
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse<UserDto> updateUser(@CurrentUser User user, @RequestBody @Valid UpdateUserRequest request) {
         return new ApiResponse<>(userUseCase.update(user.getId(), request));
+    }
+
+    @PostMapping("/user/delete")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public ApiResponse<String> deleteUser(@RequestBody @Valid DeleteUserRequest request) {
+        String res = userUseCase.deleteUser(request);
+        return new ApiResponse<>(res);
     }
 
 }

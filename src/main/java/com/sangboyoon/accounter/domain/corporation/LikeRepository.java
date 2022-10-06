@@ -17,4 +17,6 @@ public interface LikeRepository extends JpaRepository<LikeEntity, Long> {
     @Modifying
     @Query(nativeQuery = true, value = "DELETE FROM accounter.like_entity e WHERE e.corp_code = :corporation AND e.user_id = :userId")
     void deleteByCorporationAndUserIdInQuery(@Param("corporation") String corporation, @Param("userId") Long userId);
+
+    void deleteAllByUserId(Long userId);
 }
