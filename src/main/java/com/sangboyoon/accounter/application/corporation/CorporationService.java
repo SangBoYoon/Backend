@@ -8,6 +8,7 @@ import com.sangboyoon.accounter.domain.corporation.LikeRepository;
 import com.sangboyoon.accounter.domain.corporation.exception.CCorporationNotFoundException;
 import com.sangboyoon.accounter.domain.user.User;
 import com.sangboyoon.accounter.web.corporation.dto.CorporationDto;
+import com.sangboyoon.accounter.web.corporation.dto.LikeResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -55,6 +56,21 @@ public class CorporationService implements CorporationUseCase {
             corporationRepository.minusLike(corporation.getCorpCode());
             return 0;
         }
+    }
+
+    @Override
+    public List<LikeResponseDto> findLikeByUserId(User user) {
+        List<LikeEntity> likes = likeRepository.findAllByUserId(user.getId());
+        List<LikeResponseDto> list = new ArrayList<>();
+
+        for(LikeEntity likeEntity : likes) {
+            LikeResponseDto likeResponseDto = LikeResponseDto.builder()
+                    .corpCode(likeEntity.getCorpCode().getCorpCode())
+                    .userId(likeEntity.getUser().getId())
+                    .build();
+            list.add(likeResponseDto);
+        }
+        return list;
     }
 
     @Override

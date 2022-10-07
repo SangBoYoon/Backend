@@ -22,11 +22,11 @@ public class LikeEntity {
 
     @ManyToOne(targetEntity = Corporation.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "corpCode")
-    private Corporation corporation;
+    private Corporation corpCode;
 
     public static LikeEntity toLikeEntity(User user, Corporation corporation) {
         LikeEntity likeEntity = new LikeEntity();
-        likeEntity.setCorporation(corporation);
+        likeEntity.setCorpCode(corporation);
         likeEntity.setUser(user);
 
         return likeEntity;

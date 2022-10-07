@@ -3,9 +3,11 @@ package com.sangboyoon.accounter.web.corporation;
 import com.sangboyoon.accounter.application.corporation.CorporationUseCase;
 import com.sangboyoon.accounter.configuration.security.CurrentUser;
 import com.sangboyoon.accounter.domain.corporation.Corporation;
+import com.sangboyoon.accounter.domain.corporation.LikeEntity;
 import com.sangboyoon.accounter.domain.user.User;
 import com.sangboyoon.accounter.web.common.ApiResponse;
 import com.sangboyoon.accounter.web.corporation.dto.CorporationDto;
+import com.sangboyoon.accounter.web.corporation.dto.LikeResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +40,12 @@ public class CorporationController {
     public ApiResponse<Integer> likeCorporation(@CurrentUser User user, @PathVariable("corpCode") String corpCode) {
         int result = corporationUseCase.saveLike(corpCode, user);
         return new ApiResponse<>(result);
+    }
+
+    @GetMapping("/corp/like")
+    public ApiResponse<List<LikeResponseDto>> likeCorporationList(@CurrentUser User user) {
+        List<LikeResponseDto> list = corporationUseCase.findLikeByUserId(user);
+        return new ApiResponse<>(list);
     }
 
     @GetMapping("/corpCreate")

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -17,6 +18,8 @@ public interface LikeRepository extends JpaRepository<LikeEntity, Long> {
     @Modifying
     @Query(nativeQuery = true, value = "DELETE FROM accounter.like_entity e WHERE e.corp_code = :corporation AND e.user_id = :userId")
     void deleteByCorporationAndUserIdInQuery(@Param("corporation") String corporation, @Param("userId") Long userId);
+
+    List<LikeEntity> findAllByUserId(Long userId);
 
     void deleteAllByUserId(Long userId);
 }
