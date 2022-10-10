@@ -47,7 +47,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
         TokenDto tokenDto = tokenProvider.createTokenDto(user.getId(), "USER");
         log.info("{}", tokenDto.toString());
-        targetUrl = UriComponentsBuilder.fromUriString("http://laccounter-s3.s3-website.ap-northeast-2.amazonaws.com/login/token")
+        targetUrl = UriComponentsBuilder.fromUriString("http://accounter-s3.s3-website.ap-northeast-2.amazonaws.com/login/token")
                 .queryParam("accessToken", tokenDto.getAccessToken())
                 .queryParam("refreshToken", tokenDto.getRefreshToken())
                 .build().toUriString();
